@@ -6,18 +6,37 @@ import { Task, TasksList } from '../components/TasksList';
 import { TodoInput } from '../components/TodoInput';
 
 export function Home() {
+
+  interface Task {
+    id: number;
+    title: string;
+    done: boolean;
+
+  }
   const [tasks, setTasks] = useState<Task[]>([]);
+ 
 
   function handleAddTask(newTaskTitle: string) {
-    //TODO - add new task
-  }
+    const newTask={
+      id: new Date().getTime(),
+      title: newTaskTitle,
+      done: false,
+    }
+
+    setTasks(oldTask=>[...oldTask, newTask]);
+    
+   
+}
+
 
   function handleToggleTaskDone(id: number) {
-    //TODO - toggle task done if exists
+    
   }
 
   function handleRemoveTask(id: number) {
-    //TODO - remove task from state
+    const updateTask = tasks.filter(task=>task.id!==id)
+
+    setTasks(updateTask);
   }
 
   return (
@@ -32,12 +51,12 @@ export function Home() {
         removeTask={handleRemoveTask} 
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#EBEBEB'
-  }
-})
+    backgroundColor: '#EBEBEB',
+  },
+});
